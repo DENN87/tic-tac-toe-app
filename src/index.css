@@ -1,4 +1,23 @@
 body {
+<<<<<<< HEAD
+    font: ;
+    background: dimgrey;
+    /* text-align: center; */
+    color: black;
+    text-shadow: 0 0 5px rgb(255, 255, 255);
+    margin-top: 5%;
+}
+
+.board-row {
+    clear: both;
+    content: "";
+    display: table;
+}
+
+.square {
+    background: dimgrey;
+    border: 2px solid whitesmoke;
+=======
     font: 28px Futura, sans-serif;
     background: dimgrey;
     text-align: center;
@@ -16,10 +35,81 @@ body {
   .square {
     background: dimgrey;
     border: 1px solid whitesmoke;
+>>>>>>> 2c8d2d0b7f182df11eadb00066d3143b60b9b45e
     float: left;
     font-size: 45px;
     font-weight: bold;
     line-height: 34px;
+<<<<<<< HEAD
+    height: 70px;
+    /* margin-right: -1px;
+    margin-top: -1px; */
+    text-align: center;
+    width: 70px;
+    margin: 5px 5px 5px 5px;
+}
+
+.square:focus {
+    outline: none;
+}
+
+.kbd-navigation .square:focus {
+    background: rgb(0, 0, 0);
+}
+
+.game {
+    display: flex;
+    flex-direction: row;
+}
+
+.game-info {
+    /* font: 18px Futura, sans-serif; */
+    background: dimgrey;
+    /* width: 250px; */
+}
+
+div {
+    border: 1px solid lawngreen;
+    text-align: center;
+}
+
+button {
+    border-radius: 5px;
+    /* background-color: dimgrey;
+    color: whitesmoke; */
+}
+ol,
+li {
+    /* margin-left: 0; */
+    /* color: azure; */
+    /* margin-bottom: 5px; */
+    padding: 0;
+}
+
+.margin-top {
+    padding-top: 1%;
+}
+
+h3 {
+    font-weight: bold;
+}
+
+.selected {
+    font-weight: bold;
+}
+
+.squareWinner {
+    background-color: rgb(255, 81, 81);
+}
+
+.textWinner {
+    color: rgb(255, 81, 81);
+}
+
+.winner-cell {
+    background-color: rgb(255, 81, 81);
+}
+=======
     height: 63px;
     margin-right: -1px;
     margin-top: -1px;
@@ -82,3 +172,4 @@ body {
   .textWinner {
     color: rgb(255, 81, 81);
   }
+>>>>>>> 2c8d2d0b7f182df11eadb00066d3143b60b9b45e
