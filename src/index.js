@@ -33,8 +33,13 @@ function calculateWinner(squares) {
 }
 
 function Square(props) {
+    // console.log(props);
     return (
-        <button className="square" onClick={props.onClick}>
+        <button
+            id={props.cellNumber}
+            className="square"
+            onClick={props.onClick}
+        >
             {props.value}
         </button>
     );
@@ -44,6 +49,7 @@ class Board extends React.Component {
     renderSquare(i) {
         return (
             <Square
+                cellNumber={i}
                 value={this.props.squares[i].value}
                 onClick={() => this.props.onClick(i)}
             />
@@ -52,7 +58,7 @@ class Board extends React.Component {
 
     render() {
         return (
-            <div className="mt-3">
+            <div className="">
                 <div className="board-row">
                     {this.renderSquare(0)}
                     {this.renderSquare(1)}
@@ -149,16 +155,16 @@ class Game extends React.Component {
                 //history: history[this.state.stepNumber].squares[getWinner1.winNumbers[0]].isWinner = true,
             });
 
-            console.log(` winners: ${getWinner1.winNumbers[0]}`);
-            console.log(` winners: ${getWinner1.winNumbers[1]}`);
-            console.log(` winners: ${getWinner1.winNumbers[2]}`);
-            console.log(
-                ` ${
-                    history[this.state.stepNumber].squares[
-                        getWinner1.winNumbers[0]
-                    ].isWinner
-                }`
-            );
+            // console.log(` winners: ${getWinner1.winNumbers[0]}`);
+            // console.log(` winners: ${getWinner1.winNumbers[1]}`);
+            // console.log(` winners: ${getWinner1.winNumbers[2]}`);
+
+            // ---- Highlighting  he winner squares-----
+            for (let i = 0; i <= 2; i++) {
+                document
+                    .getElementById(`${getWinner1.winNumbers[i]}`)
+                    .classList.toggle("winner-cell");
+            }
 
             //this.state.history[this.state.stepNumber].squares[getWinner1.winNumbers[0]].isWinner = true;
         } else {
@@ -188,7 +194,10 @@ class Game extends React.Component {
         const currentStep = this.state.stepNumber;
 
         const moves = history.map((step, move) => {
-            const desc = move ? "Go to move #" + move : "> Start Game";
+            console.log(`Moves-> ${move}`);
+            console.log(`Moves-> ${JSON.stringify(step)}`);
+
+            const desc = move ? "Go to move #" + move : "Go to move #0";
             return (
                 <li key={move}>
                     <button
@@ -218,17 +227,26 @@ class Game extends React.Component {
             <React.Fragment>
                 <div>
                     <h3>Tic Tac Toe Game</h3>
+                    <div>{status}</div>
                     <div className="game">
                         <div className="game-board p-1">
-                            <div>{status}</div>
                             <Board
                                 squares={current.squares}
                                 onClick={(i) => this.handleClick(i)}
                             />
                         </div>
-                        <div className="game-info mt-5 p-1">
-                            <ol>{moves}</ol>
-                        </div>
+                    </div>
+                    <div>
+                        <button
+                            id="reset"
+                            type="button"
+                            className="btn btn-info btn-lg"
+                        >
+                            Reset
+                        </button>
+                    </div>
+                    <div className="game-info mt-3 p-1">
+                        <ol>{moves}</ol>
                     </div>
                 </div>
             </React.Fragment>
