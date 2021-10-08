@@ -13,19 +13,18 @@ function calculateWinner(squares) {
         [0, 4, 8],
         [2, 4, 6],
     ];
+
     // squares array [x,null,null,null,x,null,null,null,x]
     for (let i = 0; i < lines.length; i++) {
         //const [a, b, c] = lines[i];
         const a = lines[i][0];
         const b = lines[i][1];
         const c = lines[i][2];
-        //console.log(squares[a]);
         if (
             squares[a].value &&
             squares[a].value === squares[b].value &&
             squares[a].value === squares[c].value
         ) {
-            //console.log(squares[a]); // winnig squares to be color changed
             return { win: squares[a].value, winNumbers: lines[i] };
         }
     }
@@ -33,15 +32,14 @@ function calculateWinner(squares) {
 }
 
 function Square(props) {
-    // console.log(props);
     return (
-        <button
+        <div
             id={props.cellNumber}
-            className="square"
+            className="square square-board fader-1"
             onClick={props.onClick}
         >
             {props.value}
-        </button>
+        </div>
     );
 }
 
@@ -58,18 +56,18 @@ class Board extends React.Component {
 
     render() {
         return (
-            <div className="">
-                <div className="board-row">
+            <div className="col">
+                <div className="row">
                     {this.renderSquare(0)}
                     {this.renderSquare(1)}
                     {this.renderSquare(2)}
                 </div>
-                <div className="board-row">
+                <div className="row">
                     {this.renderSquare(3)}
                     {this.renderSquare(4)}
                     {this.renderSquare(5)}
                 </div>
-                <div className="board-row">
+                <div className="row">
                     {this.renderSquare(6)}
                     {this.renderSquare(7)}
                     {this.renderSquare(8)}
@@ -113,15 +111,9 @@ class Game extends React.Component {
             }
         }
 
-        //console.log(`clicked on cell i: ${i}`);
         const history = this.state.history.slice(0, this.state.stepNumber + 1);
-        //console.log(JSON.stringify(history));
-
         const current = history[history.length - 1];
-        //console.log(`click ${i}: ${JSON.stringify(history[this.state.stepNumber].squares[0].value)}`);
-
         const newSquaresToAdd = current.squares.slice();
-        //console.log(`squares: ${JSON.stringify(squares)}`);
 
         for (let i = 0; i < newSquaresToAdd.length; i++) {
             newSquaresToAdd[i] = Object.assign({}, newSquaresToAdd[i]);
@@ -147,26 +139,73 @@ class Game extends React.Component {
 
         const getWinner1 = calculateWinner(newSquaresToAdd);
 
+        // WINNER FOUND, show Winner & CURRENT STEP
         if (getWinner1.win) {
-            // WINNER FOUND SET WHO & CURRENT STEP
             this.setState({
                 whoWinner: getWinner1.win,
                 stepWinner: history.length,
-                //history: history[this.state.stepNumber].squares[getWinner1.winNumbers[0]].isWinner = true,
             });
 
-            // console.log(` winners: ${getWinner1.winNumbers[0]}`);
-            // console.log(` winners: ${getWinner1.winNumbers[1]}`);
-            // console.log(` winners: ${getWinner1.winNumbers[2]}`);
-
-            // ---- Highlighting  he winner squares-----
+            // ---- Highlighting  the winner squares-----
             for (let i = 0; i <= 2; i++) {
                 document
                     .getElementById(`${getWinner1.winNumbers[i]}`)
-                    .classList.toggle("winner-cell");
+                    .classList.add("squareWinner", "fader-0");
+                setTimeout(() => {
+                    // adding fade out & fade in effect for winner squares
+                    document
+                        .getElementById(`${getWinner1.winNumbers[i]}`)
+                        .classList.remove("fader-0");
+                }, 700);
             }
 
-            //this.state.history[this.state.stepNumber].squares[getWinner1.winNumbers[0]].isWinner = true;
+            // ---- Highlighting the Winner X or O
+            document
+                .getElementById("square-winner")
+                .classList.add("textWinner");
+
+            // ---- Disabling any click or pointer hover events
+            let squareArray = document.getElementsByClassName("square-board");
+            for (let i = 0; i < squareArray.length; i++) {
+                squareArray[i].classList.add("disable-squares");
+            }
+
+            // ---- Reseting the game, RESET BUTTON ----
+            document.getElementById("reset").onclick = () => {
+                // removing Highlighted winner classes
+                for (let i = 0; i <= 2; i++) {
+                    document
+                        .getElementById(`${getWinner1.winNumbers[i]}`)
+                        .classList.remove("squareWinner");
+                }
+                document
+                    .getElementById("square-winner")
+                    .classList.remove("textWinner");
+                let squareArray =
+                    document.getElementsByClassName("square-board");
+                for (let i = 0; i < squareArray.length; i++) {
+                    squareArray[i].classList.remove("disable-squares");
+                }
+                // Reseting the the State props to null
+                this.setState({
+                    history: [
+                        {
+                            squares: Array(9)
+                                .fill({ value: null, isWinner: null })
+                                .map((a) =>
+                                    Object.assign(
+                                        { value: null, isWinner: null },
+                                        a
+                                    )
+                                ),
+                        },
+                    ],
+                    xIsNext: true,
+                    stepNumber: 0,
+                    whoWinner: null,
+                    stepWinner: null,
+                });
+            };
         } else {
             // no winner found STEPWINNER MUST BE NULL
             this.setState({
@@ -176,7 +215,6 @@ class Game extends React.Component {
     }
 
     jumpTo(step) {
-        //console.log(`Cliked jumTo step: ${step}`);
         this.setState({
             stepNumber: step,
             xIsNext: step % 2 === 0,
@@ -185,68 +223,81 @@ class Game extends React.Component {
 
     render() {
         const history = this.state.history;
-        //console.log(`history: ${JSON.stringify(history)}`);
-
         const current = history[this.state.stepNumber];
-        //console.log(`this.state.stepNumber: ${this.state.stepNumber}`)
-        //console.log(`current: ${JSON.stringify(current)}`);
-
         const currentStep = this.state.stepNumber;
 
         const moves = history.map((step, move) => {
-            console.log(`Moves-> ${move}`);
-            console.log(`Moves-> ${JSON.stringify(step)}`);
-
             const desc = move ? "Go to move #" + move : "Go to move #0";
             return (
-                <li key={move}>
-                    <button
-                        className={currentStep === move ? "selected" : ""}
-                        onClick={() => this.jumpTo(move)}
-                    >
-                        {desc}
-                    </button>
-                </li>
+                <p
+                    className={
+                        currentStep === move
+                            ? "selected btn btn-light"
+                            : "btn btn-light"
+                    }
+                    onClick={() => this.jumpTo(move)}
+                >
+                    {desc}
+                </p>
             );
         });
 
-        let status;
+        let statusWinner;
+        let statusMessage;
         if (
             this.state.whoWinner &&
             this.state.stepNumber === this.state.stepWinner
         ) {
-            status = "Winner: " + this.state.whoWinner;
+            statusWinner = this.state.whoWinner;
+            statusMessage = " is Winner";
         } else if (this.state.stepNumber === 9) {
             // after game over go to earlier step works
-            status = "Game Over !";
+            statusMessage = "Game Over !";
         } else if (this.state.stepNumber !== this.state.stepWinner) {
-            status = "Next player: " + (this.state.xIsNext ? "X" : "O");
+            statusWinner = this.state.xIsNext ? "X" : "O";
+            statusMessage = "'s turn";
         }
 
         return (
             <React.Fragment>
-                <div>
-                    <h3>Tic Tac Toe Game</h3>
-                    <div>{status}</div>
-                    <div className="game">
-                        <div className="game-board p-1">
-                            <Board
-                                squares={current.squares}
-                                onClick={(i) => this.handleClick(i)}
-                            />
+                <div className="mt-5">
+                    <div className="container">
+                        <div className="row justify-content-between">
+                            <div className="col-4">
+                                <div className="row row-winner">
+                                    <div
+                                        id="square-winner"
+                                        className="square status-winner"
+                                    >
+                                        {statusWinner}
+                                    </div>
+                                    <div className="status-message">
+                                        {statusMessage}
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-4 reset-div">
+                                <button
+                                    id="reset"
+                                    type="button"
+                                    className="btn btn-dark btn-lg"
+                                >
+                                    RESET
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <button
-                            id="reset"
-                            type="button"
-                            className="btn btn-info btn-lg"
-                        >
-                            Reset
-                        </button>
-                    </div>
-                    <div className="game-info mt-3 p-1">
-                        <ol>{moves}</ol>
+                        <div className="row justify-content-between">
+                            <div className="col-4"></div>
+                            <div className="col-4 game-board">
+                                <Board
+                                    squares={current.squares}
+                                    onClick={(i) => this.handleClick(i)}
+                                />
+                            </div>
+                            <div className="col-4">
+                                {/* <p className="game-info">{moves}</p> */}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </React.Fragment>
