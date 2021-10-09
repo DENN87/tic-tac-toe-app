@@ -1,4 +1,4 @@
-<img width="1284" alt="Screen Shot 2021-10-07 at 8 59 55 PM" src="https://user-images.githubusercontent.com/20937211/136496339-368c34e8-203c-423a-8354-57d8404f0b3b.png">
+<img width="1284" alt="Screen Shot 2021-10-08 at 10 57 21 PM" src="https://user-images.githubusercontent.com/20937211/136646065-3ada6e1b-c6cb-4fa1-ab76-79b6e589cea8.png">
 
 ## `My version of the game Tic-Tac-Toe using React & Bootstrap.`
 
@@ -20,6 +20,5 @@ The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
 
       This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-<img width="1285" alt="Screen Shot 2021-10-07 at 9 10 31 PM" src="https://user-images.githubusercontent.com/20937211/136497095-4e5f618c-3bd9-4255-9100-f30108eb9ed5.png">
-
+<img width="1282" alt="Screen Shot 2021-10-08 at 10 57 34 PM" src="https://user-images.githubusercontent.com/20937211/136646069-e7034441-2a04-45eb-98da-39415cab440b.png">
+<img width="1282" alt="Screen Shot 2021-10-08 at 10 57 49 PM" src="https://user-images.githubusercontent.com/20937211/136646072-65218478-68f2-4540-9260-7593b0a3fd37.png">
