@@ -11,7 +11,6 @@ body {
 
 .square {
     background: #5f9ea0; /*dimgray*/
-    font-family: ;
     font-size: 50px;
     font-weight: bold;
     border-radius: 7.5px;
@@ -38,7 +37,6 @@ body {
     height: 120;
     width: 120;
     font-size: 3.5rem;
-    font-family: ;
     line-height: 1.75;
     cursor: auto;
     border: none;
