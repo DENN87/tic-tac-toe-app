@@ -1,6 +1,6 @@
 body {
-    font-family: Ubuntu;
-    background: #9b9b9b;
+    font-family: Arial Rounded MT Bold;
+    background: #2f4f4f;
     text-align: center;
     color: black;
 }
@@ -8,8 +8,10 @@ body {
 .container {
     max-width: 700px;
 }
+
 .square {
-    background: dimgray;
+    background: #5f9ea0; /*dimgray*/
+    font-family: ;
     font-size: 50px;
     font-weight: bold;
     border-radius: 7.5px;
@@ -20,9 +22,26 @@ body {
     cursor: pointer;
 }
 
-.square:hover {
-    border: 0.5px solid #ff5151;
-    background: #424242;
+.square-board:hover {
+    border: 0.5px solid #8fbc8f;
+    background: #416a6b;
+}
+
+.status-message {
+    font-size: 2rem;
+    color: #f5fffa;
+    align-self: center;
+    padding-left: 1rem;
+}
+
+.status-winner {
+    height: 120;
+    width: 120;
+    font-size: 3.5rem;
+    font-family: ;
+    line-height: 1.75;
+    cursor: auto;
+    border: none;
 }
 
 .game-board {
@@ -36,24 +55,8 @@ body {
     flex: auto;
 }
 
-.status-message {
-    font-size: 2rem;
-    color: #424242;
-    align-self: center;
-    padding-left: 1rem;
-}
-
-.status-winner {
-    height: 120;
-    width: 120;
-    font-size: 3.5rem;
-    line-height: 1.75;
-    cursor: auto;
-    border: none;
-}
-.status-winner:hover {
-    border: none;
-    background-color: dimgray;
+.row {
+    flex-wrap: unset;
 }
 
 .disable-squares {
@@ -71,10 +74,10 @@ body {
 
 #reset {
     margin: 3px;
-    background-color: dimgray;
+    background-color: #5f9ea0;
 }
 #reset:hover {
-    background-color: #424242;
+    background-color: #416a6b;
 }
 
 /*ALIGN CENTER*/
@@ -92,15 +95,18 @@ body {
 }
 
 .squareWinner {
-    background-color: #ff5151;
+    background-color: #adff2f; /*#ff5151*/
 }
 
 .textWinner {
-    color: #ff5151;
+    color: #adff2f; /*#ff5151*/
 }
 
-.row {
-    flex-wrap: unset;
+.game-over {
+    background-color: #dc143c;
+}
+.game-over-text {
+    color: #dc143c;
 }
 
 .fader-1 {

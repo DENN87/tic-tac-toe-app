@@ -96,6 +96,52 @@ class Game extends React.Component {
             stepWinner: null,
         };
     }
+
+    resetGame() {
+        document.getElementById("reset").onclick = () => {
+            // removing Highlighted winner classes
+            for (let i = 0; i <= 8; i++) {
+                document
+                    .getElementById(i)
+                    .classList.remove(
+                        "squareWinner",
+                        "game-over",
+                        "disable-squares"
+                    );
+            }
+            document
+                .getElementById("square-winner")
+                .classList.remove("textWinner");
+            document
+                .getElementById("status-message")
+                .classList.remove("game-over-text");
+
+            let squareArray = document.getElementsByClassName("square-board");
+            for (let i = 0; i < squareArray.length; i++) {
+                squareArray[i].classList.remove("disable-squares");
+            }
+            // Reseting the the State props to null
+            this.setState({
+                history: [
+                    {
+                        squares: Array(9)
+                            .fill({ value: null, isWinner: null })
+                            .map((a) =>
+                                Object.assign(
+                                    { value: null, isWinner: null },
+                                    a
+                                )
+                            ),
+                    },
+                ],
+                xIsNext: true,
+                stepNumber: 0,
+                whoWinner: null,
+                stepWinner: null,
+            });
+        };
+    }
+
     handleClick(i) {
         // click must be only on an empty cell
         for (
@@ -171,41 +217,7 @@ class Game extends React.Component {
             }
 
             // ---- Reseting the game, RESET BUTTON ----
-            document.getElementById("reset").onclick = () => {
-                // removing Highlighted winner classes
-                for (let i = 0; i <= 2; i++) {
-                    document
-                        .getElementById(`${getWinner1.winNumbers[i]}`)
-                        .classList.remove("squareWinner");
-                }
-                document
-                    .getElementById("square-winner")
-                    .classList.remove("textWinner");
-                let squareArray =
-                    document.getElementsByClassName("square-board");
-                for (let i = 0; i < squareArray.length; i++) {
-                    squareArray[i].classList.remove("disable-squares");
-                }
-                // Reseting the the State props to null
-                this.setState({
-                    history: [
-                        {
-                            squares: Array(9)
-                                .fill({ value: null, isWinner: null })
-                                .map((a) =>
-                                    Object.assign(
-                                        { value: null, isWinner: null },
-                                        a
-                                    )
-                                ),
-                        },
-                    ],
-                    xIsNext: true,
-                    stepNumber: 0,
-                    whoWinner: null,
-                    stepWinner: null,
-                });
-            };
+            this.resetGame();
         } else {
             // no winner found STEPWINNER MUST BE NULL
             this.setState({
@@ -253,6 +265,18 @@ class Game extends React.Component {
         } else if (this.state.stepNumber === 9) {
             // after game over go to earlier step works
             statusMessage = "Game Over !";
+            // game over css
+            for (let i = 0; i <= 8; i++) {
+                document
+                    .getElementById(i)
+                    .classList.add("game-over", "disable-squares");
+            }
+            document
+                .getElementById("status-message")
+                .classList.add("game-over-text");
+
+            // ---- Reseting the game, RESET BUTTON ----
+            this.resetGame();
         } else if (this.state.stepNumber !== this.state.stepWinner) {
             statusWinner = this.state.xIsNext ? "X" : "O";
             statusMessage = "'s turn";
@@ -271,7 +295,10 @@ class Game extends React.Component {
                                     >
                                         {statusWinner}
                                     </div>
-                                    <div className="status-message">
+                                    <div
+                                        id="status-message"
+                                        className="status-message"
+                                    >
                                         {statusMessage}
                                     </div>
                                 </div>
