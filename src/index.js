@@ -115,6 +115,9 @@ class Game extends React.Component {
             document
                 .getElementById("status-message")
                 .classList.remove("game-over-text");
+            document
+                .getElementById("status-message")
+                .classList.remove("centered");
 
             let squareArray = document.getElementsByClassName("square-board");
             for (let i = 0; i < squareArray.length; i++) {
@@ -209,6 +212,7 @@ class Game extends React.Component {
             document
                 .getElementById("square-winner")
                 .classList.add("textWinner");
+            document.getElementById("status-message").classList.add("centered");
 
             // ---- Disabling any click or pointer hover events
             let squareArray = document.getElementsByClassName("square-board");
@@ -261,10 +265,10 @@ class Game extends React.Component {
             this.state.stepNumber === this.state.stepWinner
         ) {
             statusWinner = this.state.whoWinner;
-            statusMessage = " is Winner";
+            statusMessage = "Winner";
         } else if (this.state.stepNumber === 9) {
             // after game over go to earlier step works
-            statusMessage = "Game Over !";
+            statusMessage = "Game Over";
             // game over css
             for (let i = 0; i <= 8; i++) {
                 document
@@ -274,6 +278,7 @@ class Game extends React.Component {
             document
                 .getElementById("status-message")
                 .classList.add("game-over-text");
+            document.getElementById("status-message").classList.add("centered");
 
             // ---- Reseting the game, RESET BUTTON ----
             this.resetGame();
@@ -285,45 +290,36 @@ class Game extends React.Component {
         return (
             <React.Fragment>
                 <div className="mt-5">
-                    <div className="container">
-                        <div className="row justify-content-between">
-                            <div className="col-4">
-                                <div className="row row-winner">
-                                    <div
-                                        id="square-winner"
-                                        className="square status-winner"
-                                    >
-                                        {statusWinner}
-                                    </div>
-                                    <div
-                                        id="status-message"
-                                        className="status-message"
-                                    >
-                                        {statusMessage}
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-4 reset-div">
-                                <button
-                                    id="reset"
-                                    type="button"
-                                    className="btn btn-dark btn-lg"
-                                >
-                                    RESET
-                                </button>
+                    <div className="d-flex">
+                        <div className="">
+                            <div
+                                id="square-winner"
+                                className="square status-winner"
+                            >
+                                {statusWinner}
                             </div>
                         </div>
-                        <div className="row justify-content-between">
-                            <div className="col-4"></div>
-                            <div className="col-4 game-board">
-                                <Board
-                                    squares={current.squares}
-                                    onClick={(i) => this.handleClick(i)}
-                                />
+                        <div className="flex-grow-1 status-message">
+                            <div id="status-message" className="">
+                                {statusMessage}
                             </div>
-                            <div className="col-4">
-                                {/* <p className="game-info">{moves}</p> */}
-                            </div>
+                        </div>
+                        <div className="reset-div">
+                            <button
+                                id="reset"
+                                type="button"
+                                className="btn btn-dark btn-lg"
+                            >
+                                RESET
+                            </button>
+                        </div>
+                    </div>
+                    <div className="d-flex justify-content-center game-board mt-5">
+                        <div className="">
+                            <Board
+                                squares={current.squares}
+                                onClick={(i) => this.handleClick(i)}
+                            />
                         </div>
                     </div>
                 </div>

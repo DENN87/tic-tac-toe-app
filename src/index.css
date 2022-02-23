@@ -1,12 +1,14 @@
+html,
 body {
     font-family: Arial Rounded MT Bold;
     background: #2f4f4f;
-    text-align: center;
     color: black;
 }
 
 .container {
-    max-width: 700px;
+    max-width: 318px;
+    min-width: 318px;
+    padding: 0;
 }
 
 .square {
@@ -19,42 +21,45 @@ body {
     margin: 3px;
     line-height: 95px;
     cursor: pointer;
+    text-align: center;
 }
 
 .square-board:hover {
     border: 0.5px solid #8fbc8f;
     background: #416a6b;
+    box-shadow: 0 0 20px 1px #5f9ea0;
+    z-index: 5;
 }
 
 .status-message {
-    font-size: 2rem;
+    font-size: 1.8rem;
     color: #f5fffa;
     align-self: center;
-    padding-left: 1rem;
 }
 
 .status-winner {
-    height: 120;
-    width: 120;
-    font-size: 3.5rem;
-    line-height: 1.75;
+    font-size: 3rem;
     cursor: auto;
     border: none;
+    text-align: center;
 }
 
-.game-board {
-    padding: 0 0 0 0;
-    width: unset;
-    flex: unset;
+.centered {
+    text-align: center;
 }
 
-.col-4 {
-    max-width: unset;
-    flex: auto;
+#square-winner {
+    height: 65px;
+    width: 65px;
+    line-height: 1.35;
 }
-
-.row {
-    flex-wrap: unset;
+.btn {
+    height: 32.5px;
+    width: 65px;
+    font-size: 1rem;
+    padding: 0;
+    border-radius: 0.3rem;
+    margin: 3px;
 }
 
 .disable-squares {
@@ -64,28 +69,15 @@ body {
     color: black;
 }
 
-/* BUTTON RESET */
 .reset-div {
-    text-align: end;
     align-self: center;
 }
 
 #reset {
-    margin: 3px;
     background-color: #5f9ea0;
 }
 #reset:hover {
     background-color: #416a6b;
-}
-
-/*ALIGN CENTER*/
-.center {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
 }
 
 .selected {
@@ -122,52 +114,17 @@ body {
     transition: opacity 2s;
 }
 
-@media (min-width: 720px) {
-    #root {
-        width: 700px;
-    }
-}
-
-@media (max-width: 460px) {
-    #root {
-        margin: 0;
-        width: 50%;
-    }
-    .col-4 {
-        padding: 0;
-        margin: 0;
-    }
-    .row {
-        margin: 0 0 0 7px;
-    }
-    .container {
-        padding: 0;
-        margin: 0;
-    }
-    .reset-div {
-        align-self: baseline;
-        margin-left: 75px;
-    }
-    .row-winner {
-        width: max-content;
-    }
-    .status-message {
-        font-size: 1.25em;
-        display: inline-flex;
-    }
-    #square-winner {
-        margin-left: 18px;
-        height: 65px;
-        width: 65px;
-        line-height: 1.15;
-    }
-    .game-board {
-        margin-top: 2rem;
-    }
-    .btn-lg {
-        padding: 0.25rem 0.75rem;
-        font-size: 1rem;
-        line-height: 1.5;
-        border-radius: 0.3rem;
-    }
+.footer {
+    color: #e9e9e9;
+    text-align: center;
+    font-family: Ubuntu;
+    font-weight: 100;
+    font-size: smaller;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+    background-color: #707070;
 }
