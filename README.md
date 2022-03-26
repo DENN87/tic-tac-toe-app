@@ -1,5 +1,3 @@
-<img height="600" alt="Screen Shot 2021-10-08 at 10 57 21 PM" src="https://user-images.githubusercontent.com/20937211/155280237-e976c5be-e4d4-414b-b55c-2c98802b0172.png">&emsp;<img height="600" alt="Screen Shot 2021-10-08 at 10 57 21 PM" src="https://user-images.githubusercontent.com/20937211/155280243-d3a016ff-5de6-45c9-9c19-974e6ac5b5ce.png">&emsp;<img height="600" alt="Screen Shot 2021-10-08 at 10 57 21 PM" src="https://user-images.githubusercontent.com/20937211/155280247-7bca5a6d-ad81-4875-947e-0d652098640b.png">
-
 ## `My version of the game Tic-Tac-Toe using React & Bootstrap.`
 
 
